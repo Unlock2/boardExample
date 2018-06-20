@@ -47,6 +47,13 @@
     </repositories>
      
     <dependencies>
+       <!-- 쿼리 로그 예쁘게 정렬 -->
+        <dependency>
+		    <groupId>org.lazyluke</groupId>
+		    <artifactId>log4jdbc-remix</artifactId>
+		    <version>0.2.7</version>
+		</dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>

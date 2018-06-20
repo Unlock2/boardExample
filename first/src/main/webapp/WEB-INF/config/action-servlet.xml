@@ -10,10 +10,16 @@
  
     <context:component-scan base-package="first"></context:component-scan>
      
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="first.common.resolver.CustomMapArgumentResolver"></bean>      
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+     
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean id="LoggerInterceptor" class="first.common.logger.LoggerInterceptor"></bean>
+            <bean id="loggerInterceptor" class="first.common.logger.LoggerInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
      
