@@ -15,6 +15,12 @@
     </properties>
      
     <repositories>
+       	<repository>
+		<id>oracle</id>
+		<name>ORACLE JDBC Repository</name>
+		<url>https://maven.atlassian.com/3rdparty/</url>
+	</repository>
+	
         <repository>
             <id>mvn2</id>
             <url>http://repo1.maven.org/maven2/</url>
@@ -36,12 +42,8 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-         
-        <repository>
-             <id>oracle</id>
-             <name>ORACLE JDBC Repository</name>
-             <url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
-        </repository>
+        
+              
     </repositories>
      
     <dependencies>
@@ -148,13 +150,15 @@
             <version>5.1.31</version>
         </dependency>
          
-        <!-- Oracle -->
-        <!-- <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>10.2.0.4.0</version>
-        </dependency> -->
- 
+         <!-- Oracle -->
+         <dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>12.1.0.1-atlassian-hosted</version>
+		</dependency>
+         
+         
+         
         <!-- AspectJ -->
         <dependency>
             <groupId>org.aspectj</groupId>
