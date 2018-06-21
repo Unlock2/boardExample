@@ -5,7 +5,7 @@
      
      <select id="selectBoardList" parameterType="hashmap" resultType="hashmap">
         <![CDATA[
-            SELECT
+        SELECT
 		    IDX,
 		    TITLE,
 		    HIT_CNT,
@@ -18,9 +18,37 @@
 
 
         ]]>
-    </select>
-    
-    <insert id="insertBoard" parameterType="hashmap">
+   	</select>
+   
+   	<insert id="insertFile" parameterType="hashmap">
+    <![CDATA[
+        INSERT INTO TB_FILE
+        (
+            IDX,
+            BOARD_IDX,
+            ORIGINAL_FILE_NAME,
+            STORED_FILE_NAME,
+            FILE_SIZE,
+            CREA_ID
+        )
+        VALUES
+        (
+            SEQ_TB_FILE_IDX.NEXTVAL,
+            #{BOARD_IDX},
+            #{ORIGINAL_FILE_NAME},
+            #{STORED_FILE_NAME},
+            #{FILE_SIZE},
+            'Admin'
+        )
+    ]]>
+	</insert>
+
+
+	<!-- <selectKey> 구문을 통해서 다음 게시글 번호를 가져온 후, 그 값은 파라미터에 다시 저장된다. -->
+    <insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="IDX">
+    <selectKey keyProperty="IDX" resultType="string" order="BEFORE">
+        SELECT SEQ_TB_BOARD_IDX.NEXTVAL FROM DUAL
+    </selectKey>
     <![CDATA[
         INSERT INTO TB_BOARD
         (
@@ -34,7 +62,7 @@
         )
         VALUES
         (
-            SEQ_TB_BOARD_IDX.NEXTVAL,
+            #{IDX},
             #{TITLE},
             #{CONTENTS},
             0,
@@ -54,7 +82,28 @@
             IDX = #{IDX}   
     ]]>
 	</update>
-	 
+	
+	<update id="updateBoard" parameterType="hashmap">
+    <![CDATA[
+        UPDATE TB_BOARD
+        SET
+            TITLE = #{TITLE},
+            CONTENTS = #{CONTENTS}
+        WHERE
+            IDX = #{IDX}   
+    ]]>
+	</update>
+	
+	<update id="deleteBoard" parameterType="hashmap">
+    <![CDATA[
+        UPDATE TB_BOARD
+        SET
+            DEL_GB = 'Y'
+        WHERE
+            IDX = #{IDX}
+    ]]>
+	</update>
+
 	<select id="selectBoardDetail" parameterType="hashmap" resultType="hashmap">
 	    <![CDATA[
 	        SELECT
