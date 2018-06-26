@@ -11,7 +11,7 @@ import first.common.dao.AbstractDAO;
 public class SampleDAO extends AbstractDAO{
 	
 	@SuppressWarnings("unchecked")
-	public java.util.List<java.util.Map<String, Object>> selectBoardList(java.util.Map<String, Object> map) {
+	public List<Map<String, Object>> selectBoardList(Map<String, Object> map) {
 		return selectList("sample.selectBoardList", map);
 	}
 
@@ -38,6 +38,10 @@ public class SampleDAO extends AbstractDAO{
 
 	public void insertFile(Map<String, Object> map) {
 		insert("sample.insertFile", map);
+	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> selectFileList(Map<String, Object> map) throws Exception {
+		return (List<Map<String, Object>>)selectList("sample.selectFileList", map);
 	}
 	
 }
