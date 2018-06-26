@@ -123,43 +123,76 @@ public class SampleController {
         }
         
         @RequestMapping(value="/sample/openBoardDetail.do")
+        // sample/openBoardDetail.do URL 호출 어노테이션이다.
 	    public ModelAndView openBoardDetail(CommandMap commandMap) throws Exception{
+        // ModelAndView라는형식의 openBoardDetail 이라는 이름으로 메서드를 선언했다. 파라미터는 CommandMap 형식의 commandMap 이름으로 사용했다.
+        // throws Exception으로 예외처리 했다.
 	        ModelAndView mv = new ModelAndView("/sample/boardDetail");
-	         
+	    // ModelAndView 를 mv로 선언했으며, sample/boardDetail.jsp를 담고 있겠다 라는 의미로 이해했다.
 	        Map<String,Object> map = sampleService.selectBoardDetail(commandMap.getMap());
+	    // map을 선언하는 부분이다. Map<String, Object>의 형식으로 선언했다.
+	    // map은 sampleService클래스의 selectBoardDetail 메서드에서 commandMap 파라미터 값을 map형식으로 변환해서 가진 값에 대한 결과값이다. 라고 이해했다.
 	        mv.addObject("map", map);
+	    // mv에 map이름으로 sampleService.selectBoardDetail(commandMap.getMap()) 에 대한 값을 추가하겠다 라는 내용으로 이해했다.
 	        mv.addObject("list", map.get("list"));
+	    // mv에 list라는 이름으로 map안에 담겨 있는 list라는 항목의 Value값을 담아서 추가하겠다 라는 내용으로 이해했다.
 	         
 	        return mv;
+	    // 위에서 2개의 addObject한 mv의 값을 Return 하겠다 라는 얘기이다.
 	    }
         
         @RequestMapping(value="/sample/openBoardUpdate.do")
+        // sample/openBoardUpdate.do 에 대한 URL 호출 어노테이션이다.
         public ModelAndView openBoardUpdate(CommandMap commandMap) throws Exception{
+        // ModelAndView라는형식의 openBoardUpdate 라는 이름으로 메서드를 선언했다. 
+       	// 파라미터는 CommandMap 형식의 commandMap 이름으로 사용했다.
+        // throws Exception으로 예외처리 했다.
             ModelAndView mv = new ModelAndView("/sample/boardUpdate");
+        // ModelAndView를 mv로 선언하였으며, sample/boardUpdate.jsp를 담고 있겠다 라는 의미이다.
              
             Map<String,Object> map = sampleService.selectBoardDetail(commandMap.getMap());
+        // 여기서도 여지없이 map을 Stirng,Object 타입으로 선언했고 
+        // 이는 sampleService 클래스의 selectBoardDetail 메서드에 commandMap파라미터 값을 map형식으로 변환해서 넣은 값을 나타낸다.
             mv.addObject("map", map.get("map"));
+        // mv에 map이라는 이름으로 sampleService.selectBoardDetail(commandMap.getMap()) 값 안에 있는 map이라는 항목을 가져와서 추가하겠다 라는 내용으로 이해했다.
             mv.addObject("list", map.get("list"));
-             
+        // mv에 list라는 이름으로 sampleService.selectBoardDetail(commandMap.getMap()) 값 안에 있는 list 라는 항목을 가져와서 추가하겠다 라는 내용으로 이해했다.
             return mv;
+        // 위의 2가지 addObject 한 mv 값을 Return 하겠다 라는 얘기이다.   
+         
         }
 
         @RequestMapping(value="/sample/updateBoard.do")
+        // sample/updateBoard.do URL에 대한 호출 어노테이션이다.
         public ModelAndView updateBoard(CommandMap commandMap) throws Exception{
+        // 또 똑같으니 넘어가자.
             ModelAndView mv = new ModelAndView("redirect:/sample/openBoardDetail.do");
+        // 이것도 위에서 한번 언급하였으나 다시 한번 얘기 해 보도록 하자.
+        // ModelAndView를 mv로 선언하였으며, sample/openBoardDetail.do 에 재접속하라는 내용을 포함하고 있다.
              
             sampleService.updateBoard(commandMap.getMap());
-             
+        // sampleService 클래스의 updateBoard 메서드에 commandMap 파라미터 값을 map형식으로 변환하여 넣은 값을 호출하라는 내용으로 이해했다.
             mv.addObject("IDX", commandMap.get("IDX"));
+        // IDX라는 이름으로 commandMap 파라미터 값에서 IDX 값을 찾은 후 mv에 값을 추가해라 라는 내용으로 이해했다.
             return mv;
+        // sampleService.updateBoard(commandMap.getMap()); 에 대한 내용은 따로 돌아가는 명령어 소스이다.
+        // mv는 IDX의 값이 추가된 mv 값을 Return 해준다는 내용이다.
+         
         }
         
         @RequestMapping(value="/sample/deleteBoard.do")
+        // sample/deleteBoard.do URL에 대한 호출 어노테이션이다.
         public ModelAndView deleteBoard(CommandMap commandMap) throws Exception{
+        // 또 나왔다.. 그냥 넘어가자.
             ModelAndView mv = new ModelAndView("redirect:/sample/openBoardList.do");
+        // 이것도 비슷하지만 복습하자는 의미에서 다시한번 적어보자.
+        // ModelAndView를 mv 선언하였으며, mv는 sample/openBoardList.do에 재접속하라는 내용을 포함하고 있다.
              
             sampleService.deleteBoard(commandMap.getMap());
+        // sampleService 클래스의 deleteBoard 메서드에 commandMap 파라미터 값을 map형식으로 변환하여 넣은 값을 호출하라는 내용이다.
              
             return mv;
+        // 결과적으로 mv 는 openBoardList.do 라는 URL에 재접속하는 값을 Return 해 준다고 볼 수 있다.
+            
         }
     }
